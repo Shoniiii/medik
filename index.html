@@ -822,7 +822,7 @@ function simulateReading(){
   return {rr, amplitude: amp};
 }
 
-const ESP_URL = 'http://10.212.53.129'; 
+const ESP_URL = 'http://10.107.131.129'; 
 async function poll(){
   try{
     const res = await fetch(ESP_URL + '/data', {cache:'no-store'});
