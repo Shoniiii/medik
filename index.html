@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Monitor Pernapasan ESP32</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
 <style>
@@ -31,7 +31,6 @@
     opacity:.16;pointer-events:none;z-index:0;
     -webkit-print-color-adjust:exact;print-color-adjust:exact;
   }
-  @media (max-width:640px){.sidebar{display:none;} .panel-wrap::before{left:0;}}
 
   .sidebar{
     position:relative;z-index:1;
@@ -167,6 +166,56 @@
 
   @page{ size:A4; margin:4cm 3cm 3cm 4cm; }
 
+  @media screen and (max-width:640px){
+  body{padding:10px;}
+  .panel-wrap{border-radius:22px;}
+  .panel-wrap::before{left:0;background-size:320px auto;}
+
+  /* sidebar jadi bottom navigation */
+  .sidebar{
+    position:fixed;left:0;right:0;bottom:0;top:auto;
+    width:100%;height:auto;flex-direction:row;justify-content:center;
+    padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));
+    border-right:none;border-top:1px solid #f0eee8;
+    box-shadow:0 -6px 20px rgba(30,20,60,.08);z-index:40;gap:0;
+  }
+  .sidebar .logo{display:none;}
+  .sidebar nav{flex-direction:row;justify-content:space-around;width:100%;gap:4px;}
+  .nav-icon{width:48px;height:42px;}
+
+  .content{padding:18px 14px calc(86px + env(safe-area-inset-bottom,0px));}
+  header{margin-bottom:14px;}
+  header h1{font-size:24px;}
+  header p{font-size:12px;flex-wrap:wrap;}
+
+  .card{padding:14px 14px;border-radius:16px;}
+  .stat-row{gap:10px;}
+  .stat-card{border-radius:16px;padding:14px 14px 8px;}
+  .stat-value{font-size:22px;}
+
+  /* kontrol: susun vertikal, tombol full width */
+  .control-bar{flex-direction:column;align-items:stretch;}
+  .control-left{width:100%;}
+  .control-left select{flex:1;min-width:0;}
+  .control-bar > div:last-child{width:100%;justify-content:space-between;}
+  .control-bar .btn{flex:1;justify-content:center;}
+
+  #trendChart{height:160px;}
+  .legend{flex-wrap:wrap;gap:8px 14px;}
+  .hint{font-size:11px;}
+
+  .card-head{align-items:flex-start;}
+  .table-wrap{max-height:320px;-webkit-overflow-scrolling:touch;}
+  table{font-size:12px;min-width:560px;}
+  th,td{padding:8px 6px;}
+  tbody td:first-child,thead th:first-child{
+    position:sticky;left:0;background:#fff;z-index:1;
+  }
+
+  .modal-card{padding:18px 16px;}
+  .field input,select{font-size:16px;} /* cegah auto-zoom di iOS */
+}
+  
   @media print{
     html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     body{padding:0;display:block;}
